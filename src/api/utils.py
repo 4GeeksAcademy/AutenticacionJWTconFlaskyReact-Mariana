@@ -1,4 +1,10 @@
 from flask import jsonify, url_for
+import re
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import smtplib
+import ssl
+import os 
 
 class APIException(Exception):
     status_code = 400
@@ -39,3 +45,44 @@ def generate_sitemap(app):
         <p>Start working on your project by following the <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Quick Start</a></p>
         <p>Remember to specify a real endpoint path like: </p>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
+
+
+def es_correo_valido(correo: str) -> bool:
+    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if re.fullmatch(patron, correo):
+        return True
+    else:
+        return False
+    
+
+def send_email (subject, to, body):
+    smtp_host= os.getenv("SMTP_HOST")
+    smtp_port= os.getenv("SMTP_PORT")
+    email_address= os.getenv("EMAIL_ADDRES")
+    email_password= os.getenv("EMAIL_PASSWORD")
+
+    message = MIMEMultipart("alternative")
+    message["Subject"] = subject
+    message["From"] = email_address
+    message["To"] = to
+
+    html=   """
+                <html>
+                    <body>
+                        """+body+"""
+                    </body>
+                </html>
+            """
+    
+    html_mime = MIMEText(html, "html")
+    message.attach(html_mime)
+
+    try: 
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context= context) as server:
+            server.login(email_address, email_password)
+            server.sendmail(smtp_host, to, message.as_string())
+            return True
+    except Exception as error:
+        print (error.args)
+        return False

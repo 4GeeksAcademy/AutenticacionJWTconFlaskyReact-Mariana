@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(242, 242, 242)
+}
+
+.sombra {
+    box-shadow: -10px 5px 15px rgba(173, 171, 171, 0.15),
+                 10px 5px 15px rgba(173, 171, 171, 0.15);
+}
+
+.texto-color {
+   color: rgb(122, 122, 122)
+}
+
+
+.ocultar {
+    opacity: 0;
+}
+
+.tarea-completa:hover .ocultar {
+    opacity: 1;
+}
+
+input:focus {
+    outline: 1px solid rgb(196, 196, 196);
+}
+
+.btn-succes {
+    background-color: rgb(174, 255, 120);
+}
+
+.btn-succes:hover {
+    background-color: rgb(13, 176, 13);
+}
+
+.btn-warnin {
+    background-color: rgb(253, 253, 138);
+}
+
+.btn-warnin:hover {
+    background-color: rgb(251, 251, 35);
+}
+
+.btn-primar {
+    background-color: rgb(171, 171, 255);
+}
+
+.btn-primar:hover {
+    background-color: rgb(53, 53, 254);
+}
+
+.btn-dange {
+    background-color: rgb(249, 147, 147);
+}
+
+.btn-dange:hover {
+    background-color: rgb(255, 41, 41);
+}

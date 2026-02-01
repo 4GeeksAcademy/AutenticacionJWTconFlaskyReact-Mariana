@@ -1,0 +1,7 @@
+.navbar-ul li a {
+  color: white;
+}
+
+.bordered {
+  border-bottom: 1px solid white;
+}
