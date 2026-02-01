@@ -25,13 +25,14 @@ const Login = () => {
     setUser((prev) => ({ ...prev, [name]: value }));
   };
 
+
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // ✅ 1) Pide token al backend (JWT)
+
       const response = await fetch(`${urlBase}/api/token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
